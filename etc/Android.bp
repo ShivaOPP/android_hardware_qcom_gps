@@ -1,43 +1,82 @@
+// TODO(porsche): keep the active A17 configuration bytes while calcite owns
+// the install modules. Other products retain the original source defaults.
+soong_config_module_type {
+    name: "porsche_gnss_config",
+    module_type: "prebuilt_etc",
+    config_namespace: "porsche",
+    bool_variables: ["a17_gnss_configs"],
+    properties: ["src"],
+}
 
-prebuilt_etc {
+porsche_gnss_config {
 
     name: "gps.conf",
     vendor: true,
-    src: "gps.conf",
+    soong_config_variables: {
+        a17_gnss_configs: {
+            src: "//vendor/oneplus/sm8350-common:porsche_gps_conf",
+            conditions_default: { src: "gps.conf" },
+        },
+    },
 }
 
-prebuilt_etc {
+porsche_gnss_config {
 
     name: "flp.conf",
     vendor: true,
-    src: "flp.conf",
+    soong_config_variables: {
+        a17_gnss_configs: {
+            src: "//vendor/oneplus/sm8350-common:porsche_flp_conf",
+            conditions_default: { src: "flp.conf" },
+        },
+    },
 }
 
-prebuilt_etc {
+porsche_gnss_config {
 
     name: "gnss_antenna_info.conf",
     vendor: true,
-    src: "gnss_antenna_info.conf",
+    soong_config_variables: {
+        a17_gnss_configs: {
+            src: "//vendor/oneplus/sm8350-common:porsche_gnss_antenna_info_conf",
+            conditions_default: { src: "gnss_antenna_info.conf" },
+        },
+    },
 }
 
-prebuilt_etc {
+porsche_gnss_config {
     name: "gnss@2.0-base.policy",
     vendor: true,
     sub_dir: "seccomp_policy",
-    src: "seccomp_policy/gnss@2.0-base.policy",
+    soong_config_variables: {
+        a17_gnss_configs: {
+            src: "//vendor/oneplus/sm8350-common:porsche_gnss_base_policy",
+            conditions_default: { src: "seccomp_policy/gnss@2.0-base.policy" },
+        },
+    },
 }
 
-prebuilt_etc {
+porsche_gnss_config {
     name: "gnss@2.0-xtra-daemon.policy",
     vendor: true,
     sub_dir: "seccomp_policy",
-    src: "seccomp_policy/gnss@2.0-xtra-daemon.policy",
+    soong_config_variables: {
+        a17_gnss_configs: {
+            src: "//vendor/oneplus/sm8350-common:porsche_gnss_xtra_policy",
+            conditions_default: { src: "seccomp_policy/gnss@2.0-xtra-daemon.policy" },
+        },
+    },
 }
 
-prebuilt_etc {
+porsche_gnss_config {
     name: "gnss@2.0-xtwifi-client.policy",
     vendor: true,
     sub_dir: "seccomp_policy",
-    src: "seccomp_policy/gnss@2.0-xtwifi-client.policy",
+    soong_config_variables: {
+        a17_gnss_configs: {
+            src: "//vendor/oneplus/sm8350-common:porsche_gnss_xtwifi_policy",
+            conditions_default: { src: "seccomp_policy/gnss@2.0-xtwifi-client.policy" },
+        },
+    },
 }
 
